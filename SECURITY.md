@@ -24,7 +24,7 @@ Do **not** open public issues for exploitable security bugs.
 
 ## Operational safety
 
-- Run `spectred` on a dedicated machine or VPS; firewall RPC (default port 8232).
+- Run `spectred` on a dedicated machine or VPS; firewall RPC (default port 8732 on mainnet, 18732 on testnet).
 - Use `-rpcuser` / `-rpcpassword` or `-rpcauth`; never expose RPC to the public internet without TLS and strict access control.
 - Back up wallet seed / `wallet.dat` offline before mainnet use.
 - Download proving params only via `./zcutil/fetch-params.sh` or official release artifacts.

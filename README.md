@@ -13,7 +13,9 @@ Privacy-focused cryptocurrency node, forked from [Zcash](https://github.com/zcas
 
 ## Status
 
-Early fork — chain parameters and genesis are not finalized. **Not production-ready.**
+Pre-release (`0.1.0`). Chain identity, ports, and address prefixes are configured for an independent Spectre network. Genesis still matches Zcash until block 1 is mined (or a new genesis is mined). Founders/funding addresses are **placeholders** — replace before mainnet.
+
+See [doc/CHAIN.md](doc/CHAIN.md) and [doc/LAUNCH.md](doc/LAUNCH.md).
 
 ## Build
 
@@ -34,7 +36,10 @@ Details: [INSTALL](INSTALL)
 | [doc/developer-notes.md](doc/developer-notes.md) | Developer conventions |
 | [doc/unit-tests.md](doc/unit-tests.md) | Tests |
 | [contrib/docker/](contrib/docker/) | Docker setup |
-| [contrib/seeds/](contrib/seeds/) | Seed-node generator (for new networks) |
+| [doc/ARCHITECTURE.md](doc/ARCHITECTURE.md) | Codebase structure and runtime diagram |
+| [doc/CHAIN.md](doc/CHAIN.md) | Network ports, HRPs, genesis, checkpoints |
+| [doc/LAUNCH.md](doc/LAUNCH.md) | Pre-mainnet launch checklist |
+| [contrib/spectre.conf.example](contrib/spectre.conf.example) | Example node config |
 
 ## License
 

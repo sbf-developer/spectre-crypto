@@ -1,4 +1,5 @@
 // Copyright (c) 2017-2023 The Zcash developers
+// Copyright (c) 2026 The Spectre developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or https://www.opensource.org/licenses/mit-license.php .
 
@@ -9,17 +10,14 @@
 #include "consensus/params.h"
 #include "util/time.h"
 
-// Deprecation policy:
-// Per https://zips.z.cash/zip-0200
-// Shut down nodes running this version of code, `RELEASE_TO_DEPRECATION_WEEKS` weeks' worth
-// of blocks after the estimated release block height. A warning is shown during the 14 days'
-// worth of blocks prior to shut down.
-static const int APPROX_RELEASE_HEIGHT = 3360652;
-static const int RELEASE_TO_DEPRECATION_WEEKS = 7;
+// Spectre does not auto-shutdown nodes by block height. Set deprecation far
+// above any realistic chain height; EnforceNodeDeprecation is a no-op on main.
+static const int APPROX_RELEASE_HEIGHT = 0;
+static const int RELEASE_TO_DEPRECATION_WEEKS = 0;
 static const int EXPECTED_BLOCKS_PER_HOUR = 3600 / Consensus::POST_BLOSSOM_POW_TARGET_SPACING;
 static_assert(EXPECTED_BLOCKS_PER_HOUR == 48, "The value of Consensus::POST_BLOSSOM_POW_TARGET_SPACING was chosen such that this assertion holds.");
-static const int ACTIVATION_TO_DEPRECATION_BLOCKS = (RELEASE_TO_DEPRECATION_WEEKS * 7 * 24 * EXPECTED_BLOCKS_PER_HOUR);
-static const int DEPRECATION_HEIGHT = APPROX_RELEASE_HEIGHT + ACTIVATION_TO_DEPRECATION_BLOCKS;
+static const int ACTIVATION_TO_DEPRECATION_BLOCKS = 0;
+static const int DEPRECATION_HEIGHT = 2100000000;
 
 // Number of blocks before deprecation to warn users
 static const int DEPRECATION_WARN_LIMIT = 14 * 24 * EXPECTED_BLOCKS_PER_HOUR;
@@ -88,7 +86,7 @@ int64_t EstimatedNodeDeprecationTime(const CClock& clock, int nHeight);
  * Checks whether the node is deprecated based on the current block height, and
  * shuts down the node with an error if so (and deprecation is not disabled for
  * the current client version). Warning and error messages are sent to the debug
- * log, the metrics UI, and (if configured) -alertnofity.
+ * log, the metrics UI, and (if configured) -alertnotify.
  *
  * fThread means run -alertnotify in a free-running thread.
  */

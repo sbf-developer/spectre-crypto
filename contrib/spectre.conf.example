@@ -1,0 +1,31 @@
+# Spectre example configuration
+# Copy to:
+#   Linux/macOS: ~/.spectre/spectre.conf
+#   Windows:     %APPDATA%\Spectre\spectre.conf
+
+# Network (omit for mainnet)
+# testnet=1
+# regtest=1
+
+# RPC (bind locally; use a strong rpcuser/rpcpassword in production)
+# rpcuser=spectre
+# rpcpassword=change-me-to-a-long-random-string
+# rpcallowip=127.0.0.1
+# rpcbind=127.0.0.1
+# Mainnet RPC default: 8732 | Testnet: 18732
+
+# P2P
+# port=8733          # mainnet default
+# listen=1
+# maxconnections=64
+
+# Mining (after network launch)
+# gen=0
+# mineraddress=YOUR_S1_OR_SPEC_ADDRESS
+
+# Logging
+# debug=rpc
+# logtimestamps=1
+
+# Privacy / wallet (see doc/CHAIN.md)
+# experimentalfeatures=1

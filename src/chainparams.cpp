@@ -88,7 +88,7 @@ public:
     CMainParams() {
         keyConstants.strNetworkID = "main";
         strCurrencyUnits = "SPEC";
-        keyConstants.bip44CoinType = 133; // As registered in https://github.com/satoshilabs/slips/blob/master/slip-0044.md
+        keyConstants.bip44CoinType = 19117; // Spectre (SLIP-0044: unregistered)
         consensus.fCoinbaseMustBeShielded = true;
         consensus.nSubsidySlowStartInterval = 20000;
         consensus.nPreBlossomSubsidyHalvingInterval = Consensus::PRE_BLOSSOM_HALVING_INTERVAL;
@@ -152,29 +152,29 @@ public:
 
         consensus.nFundingPeriodLength = consensus.nPostBlossomSubsidyHalvingInterval / 48;
 
-        // guarantees the first 2 characters, when base58 encoded, are "t1"
-        keyConstants.base58Prefixes[PUBKEY_ADDRESS]     = {0x1C,0xB8};
-        // guarantees the first 2 characters, when base58 encoded, are "t3"
-        keyConstants.base58Prefixes[SCRIPT_ADDRESS]     = {0x1C,0xBD};
+        // guarantees the first 2 characters, when base58 encoded, are "s1"
+        keyConstants.base58Prefixes[PUBKEY_ADDRESS]     = {0x1C,0x27};
+        // guarantees the first 2 characters, when base58 encoded, are "s3"
+        keyConstants.base58Prefixes[SCRIPT_ADDRESS]     = {0x1C,0x2C};
         // the first character, when base58 encoded, is "5" or "K" or "L" (as in Bitcoin)
         keyConstants.base58Prefixes[SECRET_KEY]         = {0x80};
         // do not rely on these BIP32 prefixes; they are not specified and may change
         keyConstants.base58Prefixes[EXT_PUBLIC_KEY]     = {0x04,0x88,0xB2,0x1E};
         keyConstants.base58Prefixes[EXT_SECRET_KEY]     = {0x04,0x88,0xAD,0xE4};
-        // guarantees the first 2 characters, when base58 encoded, are "zc"
-        keyConstants.base58Prefixes[ZCPAYMENT_ADDRESS]  = {0x16,0x9A};
+        // guarantees the first 2 characters, when base58 encoded, are "sc"
+        keyConstants.base58Prefixes[ZCPAYMENT_ADDRESS]  = {0x16,0xA1};
         // guarantees the first 4 characters, when base58 encoded, are "ZiVK"
         keyConstants.base58Prefixes[ZCVIEWING_KEY]      = {0xA8,0xAB,0xD3};
         // guarantees the first 2 characters, when base58 encoded, are "SK"
         keyConstants.base58Prefixes[ZCSPENDING_KEY]     = {0xAB,0x36};
 
-        keyConstants.bech32HRPs[SAPLING_PAYMENT_ADDRESS]      = "zs";
-        keyConstants.bech32HRPs[SAPLING_FULL_VIEWING_KEY]     = "zviews";
-        keyConstants.bech32HRPs[SAPLING_INCOMING_VIEWING_KEY] = "zivks";
-        keyConstants.bech32HRPs[SAPLING_EXTENDED_SPEND_KEY]   = "secret-extended-key-main";
-        keyConstants.bech32HRPs[SAPLING_EXTENDED_FVK]         = "zxviews";
+        keyConstants.bech32HRPs[SAPLING_PAYMENT_ADDRESS]      = "spec";
+        keyConstants.bech32HRPs[SAPLING_FULL_VIEWING_KEY]     = "specviews";
+        keyConstants.bech32HRPs[SAPLING_INCOMING_VIEWING_KEY] = "specivks";
+        keyConstants.bech32HRPs[SAPLING_EXTENDED_SPEND_KEY]   = "secret-extended-key-spec";
+        keyConstants.bech32HRPs[SAPLING_EXTENDED_FVK]         = "sexviews";
 
-        keyConstants.bech32mHRPs[TEX_ADDRESS]                 = "tex";
+        keyConstants.bech32mHRPs[TEX_ADDRESS]                 = "stex";
         {
             auto canopyActivation = consensus.vUpgrades[Consensus::UPGRADE_CANOPY].nActivationHeight;
             auto nu6Activation = consensus.vUpgrades[Consensus::UPGRADE_NU6].nActivationHeight;
@@ -182,60 +182,63 @@ public:
 
             // ZIP 214 Revision 0
             std::vector<std::string> bp_addresses = {
-                "t3LmX1cxWPPPqL4TZHx42HU3U5ghbFjRiif",
-                "t3Toxk1vJQ6UjWQ42tUJz2rV2feUWkpbTDs",
-                "t3ZBdBe4iokmsjdhMuwkxEdqMCFN16YxKe6",
-                "t3ZuaJziLM8xZ32rjDUzVjVtyYdDSz8GLWB",
-                "t3bAtYWa4bi8VrtvqySxnbr5uqcG9czQGTZ",
-                "t3dktADfb5Rmxncpe1HS5BRS5Gcj7MZWYBi",
-                "t3hgskquvKKoCtvxw86yN7q8bzwRxNgUZmc",
-                "t3R1VrLzwcxAZzkX4mX3KGbWpNsgtYtMntj",
-                "t3ff6fhemqPMVujD3AQurxRxTdvS1pPSaa2",
-                "t3cEUQFG3KYnFG6qYhPxSNgGi3HDjUPwC3J",
-                "t3WR9F5U4QvUFqqx9zFmwT6xFqduqRRXnaa",
-                "t3PYc1LWngrdUrJJbHkYPCKvJuvJjcm85Ch",
-                "t3bgkjiUeatWNkhxY3cWyLbTxKksAfk561R",
-                "t3Z5rrR8zahxUpZ8itmCKhMSfxiKjUp5Dk5",
-                "t3PU1j7YW3fJ67jUbkGhSRto8qK2qXCUiW3",
-                "t3S3yaT7EwNLaFZCamfsxxKwamQW2aRGEkh",
-                "t3eutXKJ9tEaPSxZpmowhzKhPfJvmtwTEZK",
-                "t3gbTb7brxLdVVghSPSd3ycGxzHbUpukeDm",
-                "t3UCKW2LrHFqPMQFEbZn6FpjqnhAAbfpMYR",
-                "t3NyHsrnYbqaySoQqEQRyTWkjvM2PLkU7Uu",
-                "t3QEFL6acxuZwiXtW3YvV6njDVGjJ1qeaRo",
-                "t3PdBRr2S1XTDzrV8bnZkXF3SJcrzHWe1wj",
-                "t3ZWyRPpWRo23pKxTLtWsnfEKeq9T4XPxKM",
-                "t3he6QytKCTydhpztykFsSsb9PmBT5JBZLi",
-                "t3VWxWDsLb2TURNEP6tA1ZSeQzUmPKFNxRY",
-                "t3NmWLvZkbciNAipauzsFRMxoZGqmtJksbz",
-                "t3cKr4YxVPvPBG1mCvzaoTTdBNokohsRJ8n",
-                "t3T3smGZn6BoSFXWWXa1RaoQdcyaFjMfuYK",
-                "t3gkDUe9Gm4GGpjMk86TiJZqhztBVMiUSSA",
-                "t3eretuBeBXFHe5jAqeSpUS1cpxVh51fAeb",
-                "t3dN8g9zi2UGJdixGe9txeSxeofLS9t3yFQ",
-                "t3S799pq9sYBFwccRecoTJ3SvQXRHPrHqvx",
-                "t3fhYnv1S5dXwau7GED3c1XErzt4n4vDxmf",
-                "t3cmE3vsBc5xfDJKXXZdpydCPSdZqt6AcNi",
-                "t3h5fPdjJVHaH4HwynYDM5BB3J7uQaoUwKi",
-                "t3Ma35c68BgRX8sdLDJ6WR1PCrKiWHG4Da9",
-                "t3LokMKPL1J8rkJZvVpfuH7dLu6oUWqZKQK",
-                "t3WFFGbEbhJWnASZxVLw2iTJBZfJGGX73mM",
-                "t3L8GLEsUn4QHNaRYcX3EGyXmQ8kjpT1zTa",
-                "t3PgfByBhaBSkH8uq4nYJ9ZBX4NhGCJBVYm",
-                "t3WecsqKDhWXD4JAgBVcnaCC2itzyNZhJrv",
-                "t3ZG9cSfopnsMQupKW5v9sTotjcP5P6RTbn",
-                "t3hC1Ywb5zDwUYYV8LwhvF5rZ6m49jxXSG5",
-                "t3VgMqDL15ZcyQDeqBsBW3W6rzfftrWP2yB",
-                "t3LC94Y6BwLoDtBoK2NuewaEbnko1zvR9rm",
-                "t3cWCUZJR3GtALaTcatrrpNJ3MGbMFVLRwQ",
-                "t3YYF4rPLVxDcF9hHFsXyc5Yq1TFfbojCY6",
-                "t3XHAGxRP2FNfhAjxGjxbrQPYtQQjc3RCQD",
+                "s3CcypyCQoHXMU6WzQs2FD1jsHCSSZkM3TR",
+                "s3DfqG82NC8jso3KWoQTFzertZ638YWgQxC",
+                "s3538RehBY9Qfh1Jtu9dgHxEAG31eaLneEA",
+                "s3H6zi46PkJEH3UC4Xd5ifzM4KKxo8eYsJB",
+                "s2yyXVKUr6YHizFqU6LTrjuejsDsEJkhFiA",
+                "s36Be6DwWTTsNXEiKZp48EXBBDUVDrpu7tc",
+                "s34AuWHGD7qpQ4Bsuc8n9KeYFNve6NMXMSV",
+                "s3719SUmT5CfMpbpREMVmHLQ7F8dSDv4FKC",
+                "s39MjmFiTq8j8267o2sZmh497QQJvfo6J6B",
+                "s3AvFFvcS76ANUseqnVAJ8htbn6ghtv6sGF",
+                "s3EgsC9GY8ZjfL9DHszSZuUvY5dMG1P4CTm",
+                "s3Fb2rCUMxzMuzKkrAsndWgh57qWxvwwe2J",
+                "s3BELw18NpvVLAajagGbZGBVMJfhStcobrR",
+                "s37afJfz9x9G2GQFKpreERgTv7qSQrwdixA",
+                "s2xmb2JbWaJZyuEoe486uTZeg8P5WpySQ5T",
+                "s3Dp8nTwKRUzHD5PxMsvBCT7d9k3ub7LPx5",
+                "s3Ch1XQgzMypJX8S9yi2TavDnaCNRCBiVde",
+                "s2ywq86TgdJ4fSnLNovs3xMhdFpL12iWML1",
+                "s3HDaQDBKwgc2Hw4Biou2yqhHnxbSFEyJYE",
+                "s3JXrzGTVCtsRvocSwBJTPoe8nDupSexYKq",
+                "s3FaeEHVgM4VDrD3QCJqkjvDNxF92XgoEDm",
+                "s35PjBvdp9g76UXZ9MLwpcrRJJRpfQgWWyF",
+                "s36q5ei9QWwusi4zTM8cdsWRzd9nVb2VG6M",
+                "s3MjgD5GMcmZZA3AWJ7jvCSjEKm78CRSDcK",
+                "s33Zdry7GErKJvrhT6W4fJHtNP787b388GN",
+                "s31EuPHPWL3ZZAFHB2UTPx8asH2GmrNECfT",
+                "s328nHhLE5tVGiNLfRewbHbpSKoqYcGTtS5",
+                "s3HcC7Qgmzv198Nj2xrLDch8oqQTt2Fk9mk",
+                "s2zYgGx28HCwmdKX6QGNcM8QZuqDtijFoXM",
+                "s36d84TxfS2WiyWX3hzW3nk7UQaXRU6x1HX",
+                "s3BvY7tkPmP5FWBxCwqrXw2zcvDKdRnxoj2",
+                "s36wd2jUhnd64VVs4PwKxwB8ztjmQPEJCMm",
+                "s3LRXJgR1WSj7GqyfoDGSxPJvbWP67q28Tr",
+                "s3MLDQSQesPizrGLHs4iiQEabzAvYcjigVn",
+                "s33twWoUF3tvVNh8w5tSZBY7JySiE1Sxm9F",
+                "s2yeTc58JNApqFa7Dmi2oPfWH6zPVV89GKm",
+                "s3DDwJxQkoKgBvMoTPxtRhnWEtPVYEakSHj",
+                "s3G1ckKQtnLgNvpx5HwMvoPRzW1hSztw6bj",
+                "s3HhGjXB4xbwNT4pji5EmCxkRkmrUj4gYSh",
+                "s34ciTXUF23U8EvVP1e2eYqTVwnFXZxXdmY",
+                "s3LBmfzLSqABTF6yGpsjLXxKRiBPp1PMxqB",
+                "s2y5YDLHSV6t2VzM1AmZLVyvXAH8Mu3uqib",
+                "s3GhkEN4kYvtPUuHPHZ3iJweDbPfGDVWk5k",
+                "s3J3AmiQCEzxwT7VjxHKNLHZauUpvkgvHmj",
+                "s2zgDBvGrqTwPhgqsZQZCszjVgpDw7MDKqS",
+                "s32nZ7pbeH7WqeyGwTJ4z7zNdQrjMti2ERx",
+                "s2xwXEo6bZoMAwQPeD88P3VqKACHJb4osoQ",
+                "s36iBtJC52t7vbckimzp7795gxEaL7ysTiK",
+                "s3GTvGY8eaQ3mdNFbGR5B1EuoqQycmBzyyF",
+                "s3HQWNJtRn2cr6WhmTfvxkbTrxCHuraonjX",
+                "s3A91CDeoZuTKiGXpRsw4YzyWXrX28AA695",
             };
 
             // ZF and MG each use a single address repeated 48 times,
             // once for each funding period.
-            std::vector<std::string> zf_addresses(48, "t3dvVE3SQEi7kqNzwrfNePxZ1d4hUyztBA1");
-            std::vector<std::string> mg_addresses(48, "t3XyYW8yBFRuMnfvm5KLGFbEVz25kckZXym");
+            std::vector<std::string> zf_addresses(48, "s31623Mb8RChRk33xBs8JPt8qXLAy3vxehA");
+            std::vector<std::string> mg_addresses(48, "s373VEaDPV2Pe8Z89fnyDf7idNQyyCZKrV1");
 
             consensus.AddZIP207FundingStream(
                 keyConstants,
@@ -258,7 +261,7 @@ public:
 
             // ZIP 214 Revision 1
             // FPF uses a single address repeated 12 times, once for each funding period.
-            std::vector<std::string> fpf_addresses(12, "t3cFfPt1Bcvgez9ZbMBFWeZsskxTkPzGCow");
+            std::vector<std::string> fpf_addresses(12, "s38s8KktTicvXF6Ug9LV5oqyfJpDdSMgUdV");
 
             consensus.AddZIP207FundingStream(
                 keyConstants,
@@ -274,7 +277,7 @@ public:
 
             // ZIP 214 Revision 2
             // FPF uses a single address repeated 36 times, once for each funding period.
-            std::vector<std::string> fpf_addresses_h3(36, "t3cFfPt1Bcvgez9ZbMBFWeZsskxTkPzGCow");
+            std::vector<std::string> fpf_addresses_h3(36, "s38s8KktTicvXF6Ug9LV5oqyfJpDdSMgUdV");
             consensus.AddZIP207FundingStream(
                 keyConstants,
                 Consensus::FS_FPF_ZCG_H3,
@@ -289,7 +292,7 @@ public:
 
             // ZIP 271
             // For convenience of distribution, we split the lockbox contents into 10 equal chunks.
-            std::string nu6_1_kho_address = "t3ev37Q2uL1sfTsiJQJiWJoFzQpDhmnUwYo";
+            std::string nu6_1_kho_address = "s3FgAJKvs1KK6U4TRYmX8ELq3FHVHdojyZt";
             static const CAmount nu6_1_disbursement_amount = 78750 * COIN;
             static const CAmount nu6_1_chunk_amount = 7875 * COIN;
             static constexpr auto nu6_1_chunks = {
@@ -315,18 +318,15 @@ public:
             }
         }
 
-        // The best chain should have at least this much work.
-        // From block 3308324, 2026-04-15.
-        consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000000018bd77669ac52c2f");
+        // The best chain should have at least this much work (updated as chain grows).
+        consensus.nMinimumChainWork = uint256S("0x00");
 
-        /**
-         * The message start string should be awesome! ⓩ❤
-         */
-        pchMessageStart[0] = 0x24;
-        pchMessageStart[1] = 0xe9;
-        pchMessageStart[2] = 0x27;
-        pchMessageStart[3] = 0x64;
-        nDefaultPort = 8233;
+        // Spectre mainnet P2P magic ("SPEC")
+        pchMessageStart[0] = 0x53;
+        pchMessageStart[1] = 0x70;
+        pchMessageStart[2] = 0x45;
+        pchMessageStart[3] = 0x43;
+        nDefaultPort = 8733;
         nPruneAfterHeight = 100000;
 
         genesis = CreateGenesisBlock(
@@ -352,112 +352,77 @@ public:
 
         checkpointData = (CCheckpointData) {
             boost::assign::map_list_of
-            (      0, consensus.hashGenesisBlock)
-            (   2500, uint256S("0x00000006dc968f600be11a86cbfbf7feb61c7577f45caced2e82b6d261d19744"))
-            (  15000, uint256S("0x00000000b6bc56656812a5b8dcad69d6ad4446dec23b5ec456c18641fb5381ba"))
-            (  67500, uint256S("0x000000006b366d2c1649a6ebb4787ac2b39c422f451880bc922e3a6fbd723616"))
-            ( 100000, uint256S("0x000000001c5c82cd6baccfc0879e3830fd50d5ede17fa2c37a9a253c610eb285"))
-            ( 133337, uint256S("0x0000000002776ccfaf06cc19857accf3e20c01965282f916b8a886e3e4a05be9"))
-            ( 180000, uint256S("0x000000001205b742eac4a1b3959635bdf8aeada078d6a996df89740f7b54351d"))
-            ( 222222, uint256S("0x000000000cafb9e56445a6cabc8057b57ee6fcc709e7adbfa195e5c7fac61343"))
-            ( 270000, uint256S("0x00000000025c1cfa0258e33ab050aaa9338a3d4aaa3eb41defefc887779a9729"))
-            ( 304600, uint256S("0x00000000028324e022a45014c4a4dc51e95d41e6bceb6ad554c5b65d5cea3ea5"))
-            ( 410100, uint256S("0x0000000002c565958f783a24a4ac17cde898ff525e75ed9baf66861b0b9fcada"))
-            ( 497000, uint256S("0x0000000000abd333f0acca6ffdf78a167699686d6a7d25c33fca5f295061ffff"))
-            ( 525000, uint256S("0x0000000001a36c500378be8862d9bf1bea8f1616da6e155971b608139cc7e39b"))
-            ( 650000, uint256S("0x0000000000a0a3fbbd739fb4fcbbfefff44efffc2064ca69a59d5284a2da26e2"))
-            ( 800000, uint256S("0x00000000013f1f4e5634e896ebdbe63dec115547c1480de0d83c64426f913c27"))
-            (1000000, uint256S("0x000000000062eff9ae053020017bfef24e521a2704c5ec9ead2a4608ac70fc7a"))
-            (1200000, uint256S("0x0000000000347d5011108fdcf667c93e622e8635c94e586556898e41db18d192"))
-            (1400000, uint256S("0x0000000001155ecec0ad3924d47ad476c0a5ed7527b8776f53cbda1a780b9f76"))
-            (1600000, uint256S("0x0000000000aae69fb228f90e77f34c24b7920667eaca726c3a3939536f03dcfc"))
-            (1860000, uint256S("0x000000000043a968c78af5fb8133e00e6fe340051c19dd969e53ab62bf3dc22a"))
-            (2000000, uint256S("0x00000000010accaf2f87934765dc2e0bf4823a2b1ae2c1395b334acfce52ad68"))
-            (2200000, uint256S("0x0000000001a0139c4c4d0e8f68cc562227c6003f4b1b640a3d921aeb8c3d2e3d"))
-            (2400000, uint256S("0x0000000000294d1c8d87a1b6566d302aa983691bc3cab0583a245389bbb9d285"))
-            (2600000, uint256S("0x0000000000b5ad92fcec0069d590f674d05ec7d96b1ff727863ea390950c4e49"))
-            (2800000, uint256S("0x00000000011a226fb25d778d65b055605a82da016989b7788e0ce83c4f8d64f7"))
-            (3000000, uint256S("0x0000000000573729e4db33678233e5dc0cc721c9c09977c64dcaa3f6344de8e9")),
-            1752983473,     // * UNIX timestamp of last checkpoint block
-            15537904,       // * total number of transactions between genesis and last checkpoint
-            5967            // * estimated number of transactions per day after checkpoint
-                            //   (total number of tx * 48 * 24) / checkpoint block height
+            (0, consensus.hashGenesisBlock),
+            0,
+            0,
+            0
         };
 
-        // Hardcoded fallback value for the Sprout shielded value pool balance
-        // for nodes that have not reindexed since the introduction of monitoring
-        // in #2795.
-        nSproutValuePoolCheckpointHeight = 520633;
-        nSproutValuePoolCheckpointBalance = 22145062442933;
+        // Fresh Spectre chain: no legacy value-pool or supply checkpoints.
+        nSproutValuePoolCheckpointHeight = 0;
+        nSproutValuePoolCheckpointBalance = 0;
         fZIP209Enabled = true;
-        hashSproutValuePoolCheckpointBlock = uint256S("0000000000c7b46b6bc04b4cbf87d8bb08722aebd51232619b214f7273f8460e");
+        hashSproutValuePoolCheckpointBlock.SetNull();
+        nChainSupplyCheckpointHeight = 0;
+        nChainSupplyCheckpointTotalSupply = 0;
+        nChainSupplyCheckpointTransparentValue = 0;
+        nChainSupplyCheckpointSproutValue = 0;
+        nChainSupplyCheckpointSaplingValue = 0;
+        nChainSupplyCheckpointOrchardValue = 0;
+        nChainSupplyCheckpointLockboxValue = 0;
+        hashChainSupplyCheckpointBlock.SetNull();
 
-        // Chain supply checkpoint at NU6.1 activation (height 3146400).
-        // This allows nodes with legacy block index data (written by zcashd
-        // versions older than 5.4.0, which did not serialize nChainSupplyDelta)
-        // to bootstrap nChainTotalSupply and nChainTransparentValue without
-        // requiring a reindex. The other pool balances are included so that
-        // we do not need to trust that the computed values from before the
-        // checkpoint are correct.
-        nChainSupplyCheckpointHeight = 3146400;
-        nChainSupplyCheckpointTotalSupply = 1640588297804480;
-        nChainSupplyCheckpointTransparentValue = 1158133657237751;
-        nChainSupplyCheckpointSproutValue = 2562695744028;
-        nChainSupplyCheckpointSaplingValue = 64691367655556;
-        nChainSupplyCheckpointOrchardValue = 415200558417145;
-        nChainSupplyCheckpointLockboxValue = 18750000;
-        hashChainSupplyCheckpointBlock = uint256S("0000000000b98a7d8f390793fa113bf6755935f0c14ea817af07d2c16f2c3ef4");
-
-        // Founders reward script expects a vector of 2-of-3 multisig addresses
+        // Placeholder P2SH addresses — replace with real 2-of-3 multisig before mainnet.
+        // Generated by contrib/devtools/gen_spectre_addresses.py
         vFoundersRewardAddress = {
-            "t3Vz22vK5z2LcKEdg16Yv4FFneEL1zg9ojd", /* main-index: 0*/
-            "t3cL9AucCajm3HXDhb5jBnJK2vapVoXsop3", /* main-index: 1*/
-            "t3fqvkzrrNaMcamkQMwAyHRjfDdM2xQvDTR", /* main-index: 2*/
-            "t3TgZ9ZT2CTSK44AnUPi6qeNaHa2eC7pUyF", /* main-index: 3*/
-            "t3SpkcPQPfuRYHsP5vz3Pv86PgKo5m9KVmx", /* main-index: 4*/
-            "t3Xt4oQMRPagwbpQqkgAViQgtST4VoSWR6S", /* main-index: 5*/
-            "t3ayBkZ4w6kKXynwoHZFUSSgXRKtogTXNgb", /* main-index: 6*/
-            "t3adJBQuaa21u7NxbR8YMzp3km3TbSZ4MGB", /* main-index: 7*/
-            "t3K4aLYagSSBySdrfAGGeUd5H9z5Qvz88t2", /* main-index: 8*/
-            "t3RYnsc5nhEvKiva3ZPhfRSk7eyh1CrA6Rk", /* main-index: 9*/
-            "t3Ut4KUq2ZSMTPNE67pBU5LqYCi2q36KpXQ", /* main-index: 10*/
-            "t3ZnCNAvgu6CSyHm1vWtrx3aiN98dSAGpnD", /* main-index: 11*/
-            "t3fB9cB3eSYim64BS9xfwAHQUKLgQQroBDG", /* main-index: 12*/
-            "t3cwZfKNNj2vXMAHBQeewm6pXhKFdhk18kD", /* main-index: 13*/
-            "t3YcoujXfspWy7rbNUsGKxFEWZqNstGpeG4", /* main-index: 14*/
-            "t3bLvCLigc6rbNrUTS5NwkgyVrZcZumTRa4", /* main-index: 15*/
-            "t3VvHWa7r3oy67YtU4LZKGCWa2J6eGHvShi", /* main-index: 16*/
-            "t3eF9X6X2dSo7MCvTjfZEzwWrVzquxRLNeY", /* main-index: 17*/
-            "t3esCNwwmcyc8i9qQfyTbYhTqmYXZ9AwK3X", /* main-index: 18*/
-            "t3M4jN7hYE2e27yLsuQPPjuVek81WV3VbBj", /* main-index: 19*/
-            "t3gGWxdC67CYNoBbPjNvrrWLAWxPqZLxrVY", /* main-index: 20*/
-            "t3LTWeoxeWPbmdkUD3NWBquk4WkazhFBmvU", /* main-index: 21*/
-            "t3P5KKX97gXYFSaSjJPiruQEX84yF5z3Tjq", /* main-index: 22*/
-            "t3f3T3nCWsEpzmD35VK62JgQfFig74dV8C9", /* main-index: 23*/
-            "t3Rqonuzz7afkF7156ZA4vi4iimRSEn41hj", /* main-index: 24*/
-            "t3fJZ5jYsyxDtvNrWBeoMbvJaQCj4JJgbgX", /* main-index: 25*/
-            "t3Pnbg7XjP7FGPBUuz75H65aczphHgkpoJW", /* main-index: 26*/
-            "t3WeKQDxCijL5X7rwFem1MTL9ZwVJkUFhpF", /* main-index: 27*/
-            "t3Y9FNi26J7UtAUC4moaETLbMo8KS1Be6ME", /* main-index: 28*/
-            "t3aNRLLsL2y8xcjPheZZwFy3Pcv7CsTwBec", /* main-index: 29*/
-            "t3gQDEavk5VzAAHK8TrQu2BWDLxEiF1unBm", /* main-index: 30*/
-            "t3Rbykhx1TUFrgXrmBYrAJe2STxRKFL7G9r", /* main-index: 31*/
-            "t3aaW4aTdP7a8d1VTE1Bod2yhbeggHgMajR", /* main-index: 32*/
-            "t3YEiAa6uEjXwFL2v5ztU1fn3yKgzMQqNyo", /* main-index: 33*/
-            "t3g1yUUwt2PbmDvMDevTCPWUcbDatL2iQGP", /* main-index: 34*/
-            "t3dPWnep6YqGPuY1CecgbeZrY9iUwH8Yd4z", /* main-index: 35*/
-            "t3QRZXHDPh2hwU46iQs2776kRuuWfwFp4dV", /* main-index: 36*/
-            "t3enhACRxi1ZD7e8ePomVGKn7wp7N9fFJ3r", /* main-index: 37*/
-            "t3PkLgT71TnF112nSwBToXsD77yNbx2gJJY", /* main-index: 38*/
-            "t3LQtHUDoe7ZhhvddRv4vnaoNAhCr2f4oFN", /* main-index: 39*/
-            "t3fNcdBUbycvbCtsD2n9q3LuxG7jVPvFB8L", /* main-index: 40*/
-            "t3dKojUU2EMjs28nHV84TvkVEUDu1M1FaEx", /* main-index: 41*/
-            "t3aKH6NiWN1ofGd8c19rZiqgYpkJ3n679ME", /* main-index: 42*/
-            "t3MEXDF9Wsi63KwpPuQdD6by32Mw2bNTbEa", /* main-index: 43*/
-            "t3WDhPfik343yNmPTqtkZAoQZeqA83K7Y3f", /* main-index: 44*/
-            "t3PSn5TbMMAEw7Eu36DYctFezRzpX1hzf3M", /* main-index: 45*/
-            "t3R3Y5vnBLrEn8L6wFjPjBLnxSUQsKnmFpv", /* main-index: 46*/
-            "t3Pcm737EsVkGTbhsu2NekKtJeG92mvYyoN", /* main-index: 47*/
+            "s33b9CNWtGSjg1pRkcnkyvXQoWytwm16sJx",
+            "s3E7nj6aVSqcwxgnyR6p3un44kcvMWkSqMD",
+            "s2zvGBkdc5Me2jaqGWReteskpRVrXc4U4qE",
+            "s38X96nt6bLnA3Kc5ZhRMm8cTaHMcxgwxjE",
+            "s3GTZBH5BLpND2DdRGoRfYFehHZxzsidSsp",
+            "s383K1RB7jEEJSfDYsHYHyN6wir4M3odKuq",
+            "s39m2si1qEz8EgWXVAhDp2tihfmb4h2CLKt",
+            "s39bBzQx672rf2jtwgsXfq5uUMaKfVXcA73",
+            "s3FjSmBoU1Babh4ZyWRbtVyWiv5CMrnajdp",
+            "s34AWRysMWLao4df21epqfdzz1XjZVoZaMM",
+            "s32HDQKTsRZeMPUcNHeLDrDM6f73Ebi3AuX",
+            "s36QaxmYfybqfMXHNUHoMPxLKu4N9nWLEib",
+            "s3HYf9Hzxvvdvz8EaujsKtwbrtZdKmGYXGN",
+            "s3C1J9g9HhhzjE59hnrh8Fe4dS3AtXFj3Yb",
+            "s3MYZtww5PRYKkjcQGPKzv74Z6mbvPAbJou",
+            "s3HC2g8mb2g1F9keGLJzghvm6fdQ2nZ8ysf",
+            "s31cmyPGnDMumAgLjtr9sNwJfdmoRGLfShV",
+            "s3HxJPXrwX5fdTPq8GiE3NVwA3vqbYwZ6iK",
+            "s3KdpNDvScdFiEvUKvouYopxY5cTpmK4D3W",
+            "s3JE7PPi7pxddZqSLKtNLCai92G294NK8EB",
+            "s3BD4Z9Y74udx8ej3jHbegkFKWcmCHQkhm7",
+            "s32pqv86yiGphhhVEoHpfEinzsGYjSLEx2M",
+            "s31hi9ZKNUPcUDuVAuMSJR5PD8UtvKjdnNM",
+            "s31GfiJbYd5a7ctqEkFvBVnrNvnKxnJPU79",
+            "s35UBSP1Cc9H7Sh8nhuVUEmMyH2jUSXrogt",
+            "s31RQVQQ9jzWhNYQdDmFPJd4zofX74vxxpz",
+            "s3MgUkXvLsg2EfcKDLzjBZKbFAQ78ZP9vpo",
+            "s3HEbFUKrS6ctDz3Hi8JYK3WUCMW4kiXqxx",
+            "s32XxAwgKEAoQAAYauar19xCNwEcEbfm4QZ",
+            "s3Hiot2r24bBFQZEJ4vQTE6VqE5QqPaKkXh",
+            "s3ESHaM23BRW39NnjRUX6sBr1t829jPRgMA",
+            "s3Gp4XBPU51AYaGqnZhWjPDqvu4AbMmf6UA",
+            "s3KjChM5w9KjRWyhf61a3GDY6BsVF6zonQg",
+            "s3JQ7wqruRMHMHjVyNttzTiJhisxXYcvxxk",
+            "s36556QmL63RxHMwoEwDAGRsdb6ZyUZFcyE",
+            "s32bRYPbKUxRtA9jgMmeFBBvwQjuYsTXDiZ",
+            "s3DiJUNWnCFxRYzfXy4vta1bmy4BTVyVpij",
+            "s2xqMDmT7aRMuowgenqaBwqbuukezaWNrvN",
+            "s37M62JvAz7ztxGc6iJjmYmQwkCKLjmyEJz",
+            "s3J1Vghzed9qrBhW5ssYg56UC7wf9bY5C6f",
+            "s31naw3Gff23e1LiUAeysTHiZaEmTMMkMc5",
+            "s3C9ChvKJooL7PMsy1WNrCKpJuyW9Jmt48F",
+            "s2yGPcyiwujK8Efxy8MUhEKjrTnG3Pu2Wf5",
+            "s36fYx2GpRwgudKuK2rWMUjGs9AqxnxyMWb",
+            "s3GUGRcVLNiyw8cMrFY5Tit9PXU2f7Gpq4M",
+            "s34ed2Xjo6kPZQRHrb2nR5N54QHkvySEgYc",
+            "s36Xvj6wiThhdoxo7bBhE7FoiinqKviqcNx",
+            "s2xZP4DHtjL4wGNusZVVJSRjjus1p8EyKtk",
         };
 
         assert(vFoundersRewardAddress.size() <= consensus.GetLastFoundersRewardBlockHeight(0));
@@ -473,7 +438,7 @@ public:
     CTestNetParams() {
         keyConstants.strNetworkID = "test";
         strCurrencyUnits = "TSPEC";
-        keyConstants.bip44CoinType = 1;
+        keyConstants.bip44CoinType = 19118; // Spectre testnet
         consensus.fCoinbaseMustBeShielded = true;
         consensus.nSubsidySlowStartInterval = 20000;
         consensus.nPreBlossomSubsidyHalvingInterval = Consensus::PRE_BLOSSOM_HALVING_INTERVAL;
@@ -553,13 +518,13 @@ public:
         // guarantees the first 2 characters, when base58 encoded, are "ST"
         keyConstants.base58Prefixes[ZCSPENDING_KEY]     = {0xAC,0x08};
 
-        keyConstants.bech32HRPs[SAPLING_PAYMENT_ADDRESS]      = "ztestsapling";
-        keyConstants.bech32HRPs[SAPLING_FULL_VIEWING_KEY]     = "zviewtestsapling";
-        keyConstants.bech32HRPs[SAPLING_INCOMING_VIEWING_KEY] = "zivktestsapling";
-        keyConstants.bech32HRPs[SAPLING_EXTENDED_SPEND_KEY]   = "secret-extended-key-test";
-        keyConstants.bech32HRPs[SAPLING_EXTENDED_FVK]         = "zxviewtestsapling";
+        keyConstants.bech32HRPs[SAPLING_PAYMENT_ADDRESS]      = "tspec";
+        keyConstants.bech32HRPs[SAPLING_FULL_VIEWING_KEY]     = "tspecviews";
+        keyConstants.bech32HRPs[SAPLING_INCOMING_VIEWING_KEY] = "tspecivks";
+        keyConstants.bech32HRPs[SAPLING_EXTENDED_SPEND_KEY]   = "secret-extended-key-tspec";
+        keyConstants.bech32HRPs[SAPLING_EXTENDED_FVK]         = "txspecviews";
 
-        keyConstants.bech32mHRPs[TEX_ADDRESS]                 = "textest";
+        keyConstants.bech32mHRPs[TEX_ADDRESS]                 = "tstex";
 
         // Testnet funding streams
         {
@@ -569,62 +534,62 @@ public:
 
             // ZIP 214 Revision 0
             std::vector<std::string> bp_addresses = {
-                "t26ovBdKAJLtrvBsE2QGF4nqBkEuptuPFZz",
-                "t26ovBdKAJLtrvBsE2QGF4nqBkEuptuPFZz",
-                "t26ovBdKAJLtrvBsE2QGF4nqBkEuptuPFZz",
-                "t26ovBdKAJLtrvBsE2QGF4nqBkEuptuPFZz",
-                "t2NNHrgPpE388atmWSF4DxAb3xAoW5Yp45M",
-                "t2VMN28itPyMeMHBEd9Z1hm6YLkQcGA1Wwe",
-                "t2CHa1TtdfUV8UYhNm7oxbzRyfr8616BYh2",
-                "t2F77xtr28U96Z2bC53ZEdTnQSUAyDuoa67",
-                "t2ARrzhbgcpoVBDPivUuj6PzXzDkTBPqfcT",
-                "t278aQ8XbvFR15mecRguiJDQQVRNnkU8kJw",
-                "t2Dp1BGnZsrTXZoEWLyjHmg3EPvmwBnPDGB",
-                "t2KzeqXgf4ju33hiSqCuKDb8iHjPCjMq9iL",
-                "t2Nyxqv1BiWY1eUSiuxVw36oveawYuo18tr",
-                "t2DKFk5JRsVoiuinK8Ti6eM4Yp7v8BbfTyH",
-                "t2CUaBca4k1x36SC4q8Nc8eBoqkMpF3CaLg",
-                "t296SiKL7L5wvFmEdMxVLz1oYgd6fTfcbZj",
-                "t29fBCFbhgsjL3XYEZ1yk1TUh7eTusB6dPg",
-                "t2FGofLJXa419A76Gpf5ncxQB4gQXiQMXjK",
-                "t2ExfrnRVnRiXDvxerQ8nZbcUQvNvAJA6Qu",
-                "t28JUffLp47eKPRHKvwSPzX27i9ow8LSXHx",
-                "t2JXWPtrtyL861rFWMZVtm3yfgxAf4H7uPA",
-                "t2QdgbJoWfYHgyvEDEZBjHmgkr9yNJff3Hi",
-                "t2QW43nkco8r32ZGRN6iw6eSzyDjkMwCV3n",
-                "t2DgYDXMJTYLwNcxighQ9RCgPxMVATRcUdC",
-                "t2Bop7dg33HGZx3wunnQzi2R2ntfpjuti3M",
-                "t2HVeEwovcLq9RstAbYkqngXNEsCe2vjJh9",
-                "t2HxbP5keQSx7p592zWQ5bJ5GrMmGDsV2Xa",
-                "t2TJzUg2matao3mztBRJoWnJY6ekUau6tPD",
-                "t29pMzxmo6wod25YhswcjKv3AFRNiBZHuhj",
-                "t2QBQMRiJKYjshJpE6RhbF7GLo51yE6d4wZ",
-                "t2F5RqnqguzZeiLtYHFx4yYfy6pDnut7tw5",
-                "t2CHvyZANE7XCtg8AhZnrcHCC7Ys1jJhK13",
-                "t2BRzpMdrGWZJ2upsaNQv6fSbkbTy7EitLo",
-                "t2BFixHGQMAWDY67LyTN514xRAB94iEjXp3",
-                "t2Uvz1iVPzBEWfQBH1p7NZJsFhD74tKaG8V",
-                "t2CmFDj5q6rJSRZeHf1SdrowinyMNcj438n",
-                "t2ErNvWEReTfPDBaNizjMPVssz66aVZh1hZ",
-                "t2GeJQ8wBUiHKDVzVM5ZtKfY5reCg7CnASs",
-                "t2L2eFtkKv1G6j55kLytKXTGuir4raAy3yr",
-                "t2EK2b87dpPazb7VvmEGc8iR6SJ289RywGL",
-                "t2DJ7RKeZJxdA4nZn8hRGXE8NUyTzjujph9",
-                "t2K1pXo4eByuWpKLkssyMLe8QKUbxnfFC3H",
-                "t2TB4mbSpuAcCWkH94Leb27FnRxo16AEHDg",
-                "t2Phx4gVL4YRnNsH3jM1M7jE4Fo329E66Na",
-                "t2VQZGmeNomN8c3USefeLL9nmU6M8x8CVzC",
-                "t2RicCvTVTY5y9JkreSRv3Xs8q2K67YxHLi",
-                "t2JrSLxTGc8wtPDe9hwbaeUjCrCfc4iZnDD",
-                "t2Uh9Au1PDDSw117sAbGivKREkmMxVC5tZo",
-                "t2FDwoJKLeEBMTy3oP7RLQ1Fihhvz49a3Bv",
-                "t2FY18mrgtb7QLeHA8ShnxLXuW8cNQ2n1v8",
-                "t2L15TkDYum7dnQRBqfvWdRe8Yw3jVy9z7g",
+                "t2MfEL68HKC3ZPvXyuPAdyPE16Eqqy2FYMS",
+                "t2PgjehvuZonKaXKM6BcEiWvKPJLpJaNm2v",
+                "t2FRGg599AgQSrn53shxK2TRNVDrYw5uMSH",
+                "t2Ss7iWEbuKcnesGuuJ67Jm8xPZymKMZt8b",
+                "t2Si2nkrf35KJTyUiKHYagSS9hxuYZA9BWE",
+                "t2RhUNoBiE6NuHXX9B97S379JqRiECGiJD2",
+                "t2NUw2THJyARmJM51M646V2idRWyFFGd8eS",
+                "t2FspibzvvMXqyNHmTnstXb4hC2gSiVDuie",
+                "t2JgQ1J46knMpy2kRWUYNMtFARhJ6DVfmSr",
+                "t2G89D83hUgByjdkm9TjVEdNCaiLkR1tZik",
+                "t2JicHfndKzTqHta6Y3F962i6oL6bQf8Jvf",
+                "t2U7qyKgyEhiKWidXjtYmo5K5msCEWrgQjc",
+                "t2MbDuzDC9mWY7XPdBPAeLdNs3BucWNNF8r",
+                "t2BkV39i5s5SVVWf4NEmyKQnGJFNpoZe9Yc",
+                "t2Nr6VeZvX81croQ7t6gFbWNwKSHCdp8sf9",
+                "t2GLnBThRLKtVmaeXpjQAeHhFND8i2E2MqB",
+                "t2TsZC2YUM71DxJaYSzpKFauBe1Vk2mMzNz",
+                "t2A4LW1nmTLefFnUqiRvFtMXwEaAfXFyR2j",
+                "t2Cko8qCuFLVEumPjiCB4CCrfubnq2XX8So",
+                "t2LxqXjysFG1pyQd1hb77yQ7TRrJAZLqxWt",
+                "t2UftkxyDZGdXUewqp837Y13aq1mpXM8cCi",
+                "t2ExWrmDHfFHe7eoGVNiiWfpyYkydwb35gv",
+                "t2PMpwn88gMSrqGnyRrQ3q3FEzQxuffpQ7v",
+                "t2T2UtPgp5HsuqgotGZN3KjdeFAtDVjVxeY",
+                "t2RY25oaspdJvdqSn9nutCnWwYMLSiDsRpJ",
+                "t2C11PWjUg6Yz2uiEoZHZaw8z5DqXaBhJki",
+                "t2C7QY9mdgaM2eqSHe1d7w522ZaGsbEgunn",
+                "t27PeieZ3S5PSJjVbw6x23drx44zYCeMS4K",
+                "t2RUvZ1dJzBHKSW4BmHHJNiRzzNdbs1uMjr",
+                "t2LgUP4C6TYCSmATFQpBK8WjHRGZ51w6bgA",
+                "t2GgsouwvcGCNNt3BXJZXGW69rhhckTMJTy",
+                "t2Kmsts11NdvcUvh71XaDmk3UPhWBAUcnpE",
+                "t2NfaAyHYCfuQmD5CWND18BnwEMNwy8QBkh",
+                "t29EWyLYaweBazmCSyXNeh4WNP9rzYojtBk",
+                "t2J66xPyrC4siK7WtyGjqeXbt7zvyL1h3sb",
+                "t2TduW3orSaeAFsEGardWVmFqX6LKVtAXgS",
+                "t27sJYiXsehANNzxd1LFCC8CcFtcNEJcMVh",
+                "t2GF4sstF42qjCLWRbTgmmiE7XEkXRDrLet",
+                "t2Dj2xv7N7uVNv9b952ku1YD4ZFKdBUTBod",
+                "t2VbxkxJ6VfPKRKgvbRsUCQoR8GMUk7aGJi",
+                "t28KTJXrX9LAp97AZBQnT35APBpLJ6us1XV",
+                "t2RhaA1kiAZWcBYEUjHyYhQwvHoFtP1m21V",
+                "t2BmWAYcTiteCZY8XvQLnTTXD4GSW7HZooq",
+                "t2GEeZauPuCG9jaLNZeFFeqzPsEStzETsf4",
+                "t2Etdy8mDsXmvjKkdUwBahMGPh9hHW4wbAj",
+                "t28rw9Vwxb4QPTmm9qecikbFE9DFBVcjqTu",
+                "t2QHLKFiYQJt6JEPgKfjkvC3yaCjRk5RMz2",
+                "t2SWHBQKJZ54sfdPQVkfujcXwzjS1ni4AC8",
+                "t27zpAAMu2vEP5njUGdrHJRZWVA4889zyek",
+                "t2QCdSBjTzqHKwnefzCD72xTjjfg1cZhze1",
+                "t2H3me4Qm9SEWk4QFn8TrZabubuDAg4XYCL",
             };
 
             // ZF and MG use the same address for each funding period
-            std::vector<std::string> zf_addresses(51, "t27eWDgjFYJGVXmzrXeVjnb5J3uXDM9xH9v");
-            std::vector<std::string> mg_addresses(51, "t2Gvxv2uNM7hbbACjNox4H6DjByoKZ2Fa3P");
+            std::vector<std::string> zf_addresses(51, "t29yDU4bC9GeSNgJ13gmGsTDzp5Vo8cdKSG");
+            std::vector<std::string> mg_addresses(51, "t2AtNsos9WB7Fqx3UjiZEAaa1YgXeCw3ker");
 
             consensus.AddZIP207FundingStream(
                 keyConstants,
@@ -648,7 +613,7 @@ public:
             // ZIP 214 Revision 1
             // FPF uses a single address repeated 13 times, once for each funding period.
             // There are 13 periods because the start height does not align with a period boundary.
-            std::vector<std::string> fpf_addresses(13, "t2HifwjUj9uyxr9bknR8LFuQbc98c3vkXtu");
+            std::vector<std::string> fpf_addresses(13, "t2LtPHSYNHUKuDauwsjeB8FnBiWMdwLXnAE");
             consensus.AddZIP207FundingStream(
                 keyConstants,
                 Consensus::FS_FPF_ZCG,
@@ -665,7 +630,7 @@ public:
             // FPF uses a single address repeated 27 times, once for each funding period.
             // There are 27 periods because the start height is after the second halving
             // on testnet and does not align with a period boundary.
-            std::vector<std::string> fpf_addresses_h3(27, "t2HifwjUj9uyxr9bknR8LFuQbc98c3vkXtu");
+            std::vector<std::string> fpf_addresses_h3(27, "t2LtPHSYNHUKuDauwsjeB8FnBiWMdwLXnAE");
             consensus.AddZIP207FundingStream(
                 keyConstants,
                 Consensus::FS_FPF_ZCG_H3,
@@ -680,7 +645,7 @@ public:
 
             // ZIP 271
             // For testing purposes, we split the lockbox contents into 10 equal chunks.
-            std::string nu6_1_kho_address = "t2RnBRiqrN1nW4ecZs1Fj3WWjNdnSs4kiX8";
+            std::string nu6_1_kho_address = "t2B2mLHUdBbz7gkdABqdxftoMD5zPymxNjX";
             static const CAmount nu6_1_disbursement_amount = 78750 * COIN;
             static const CAmount nu6_1_chunk_amount = 7875 * COIN;
             static constexpr auto nu6_1_chunks = {
@@ -724,13 +689,14 @@ public:
         consensus.nFutureTimestampSoftForkHeight = consensus.vUpgrades[Consensus::UPGRADE_BLOSSOM].nActivationHeight + 6;
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("000000000000000000000000000000000000000000000000000000263c0984a2");
+        consensus.nMinimumChainWork = uint256S("0x00");
 
-        pchMessageStart[0] = 0xfa;
-        pchMessageStart[1] = 0x1a;
-        pchMessageStart[2] = 0xf9;
-        pchMessageStart[3] = 0xbf;
-        nDefaultPort = 18233;
+        // Spectre testnet P2P magic ("TSPC")
+        pchMessageStart[0] = 0x54;
+        pchMessageStart[1] = 0x53;
+        pchMessageStart[2] = 0x50;
+        pchMessageStart[3] = 0x43;
+        nDefaultPort = 18733;
         nPruneAfterHeight = 1000;
 
         genesis = CreateGenesisBlock(
@@ -757,46 +723,28 @@ public:
 
         checkpointData = (CCheckpointData) {
             boost::assign::map_list_of
-            (0, consensus.hashGenesisBlock)
-            (38000, uint256S("0x001e9a2d2e2892b88e9998cf7b079b41d59dd085423a921fe8386cecc42287b8")),
-            1486897419,  // * UNIX timestamp of last checkpoint block
-            47163,       // * total number of transactions between genesis and last checkpoint
-            715          //   total number of tx / (checkpoint block height / (24 * 24))
+            (0, consensus.hashGenesisBlock),
+            0,
+            0,
+            0
         };
 
-        // Hardcoded fallback value for the Sprout shielded value pool balance
-        // for nodes that have not reindexed since the introduction of monitoring
-        // in #2795.
-        nSproutValuePoolCheckpointHeight = 440329;
-        nSproutValuePoolCheckpointBalance = 40000029096803;
+        // Fresh Spectre chain: no legacy value-pool or supply checkpoints.
+        nSproutValuePoolCheckpointHeight = 0;
+        nSproutValuePoolCheckpointBalance = 0;
         fZIP209Enabled = true;
-        hashSproutValuePoolCheckpointBlock = uint256S("000a95d08ba5dcbabe881fc6471d11807bcca7df5f1795c99f3ec4580db4279b");
-
-        // Chain supply checkpoint at NU6.1 activation (height 3536500).
-        nChainSupplyCheckpointHeight = 3536500;
-        nChainSupplyCheckpointTotalSupply = 1690647512835043;
-        nChainSupplyCheckpointTransparentValue = 1499728640946163;
-        nChainSupplyCheckpointSproutValue = 42832983037484;
-        nChainSupplyCheckpointSaplingValue = 140562922195481;
-        nChainSupplyCheckpointOrchardValue = 7522947905915;
-        nChainSupplyCheckpointLockboxValue = 18750000;
-        hashChainSupplyCheckpointBlock = uint256S("01b947c7556b23040dc6840e9d3e4c6d9478c67a87b9737a83be848729d6e0af");
+        hashSproutValuePoolCheckpointBlock.SetNull();
+        nChainSupplyCheckpointHeight = 0;
+        nChainSupplyCheckpointTotalSupply = 0;
+        nChainSupplyCheckpointTransparentValue = 0;
+        nChainSupplyCheckpointSproutValue = 0;
+        nChainSupplyCheckpointSaplingValue = 0;
+        nChainSupplyCheckpointOrchardValue = 0;
+        nChainSupplyCheckpointLockboxValue = 0;
+        hashChainSupplyCheckpointBlock.SetNull();
 
         // Founders reward script expects a vector of 2-of-3 multisig addresses
-        vFoundersRewardAddress = {
-            "t2UNzUUx8mWBCRYPRezvA363EYXyEpHokyi", "t2N9PH9Wk9xjqYg9iin1Ua3aekJqfAtE543", "t2NGQjYMQhFndDHguvUw4wZdNdsssA6K7x2", "t2ENg7hHVqqs9JwU5cgjvSbxnT2a9USNfhy",
-            "t2BkYdVCHzvTJJUTx4yZB8qeegD8QsPx8bo", "t2J8q1xH1EuigJ52MfExyyjYtN3VgvshKDf", "t2Crq9mydTm37kZokC68HzT6yez3t2FBnFj", "t2EaMPUiQ1kthqcP5UEkF42CAFKJqXCkXC9",
-            "t2F9dtQc63JDDyrhnfpzvVYTJcr57MkqA12", "t2LPirmnfYSZc481GgZBa6xUGcoovfytBnC", "t26xfxoSw2UV9Pe5o3C8V4YybQD4SESfxtp", "t2D3k4fNdErd66YxtvXEdft9xuLoKD7CcVo",
-            "t2DWYBkxKNivdmsMiivNJzutaQGqmoRjRnL", "t2C3kFF9iQRxfc4B9zgbWo4dQLLqzqjpuGQ", "t2MnT5tzu9HSKcppRyUNwoTp8MUueuSGNaB", "t2AREsWdoW1F8EQYsScsjkgqobmgrkKeUkK",
-            "t2Vf4wKcJ3ZFtLj4jezUUKkwYR92BLHn5UT", "t2K3fdViH6R5tRuXLphKyoYXyZhyWGghDNY", "t2VEn3KiKyHSGyzd3nDw6ESWtaCQHwuv9WC", "t2F8XouqdNMq6zzEvxQXHV1TjwZRHwRg8gC",
-            "t2BS7Mrbaef3fA4xrmkvDisFVXVrRBnZ6Qj", "t2FuSwoLCdBVPwdZuYoHrEzxAb9qy4qjbnL", "t2SX3U8NtrT6gz5Db1AtQCSGjrpptr8JC6h", "t2V51gZNSoJ5kRL74bf9YTtbZuv8Fcqx2FH",
-            "t2FyTsLjjdm4jeVwir4xzj7FAkUidbr1b4R", "t2EYbGLekmpqHyn8UBF6kqpahrYm7D6N1Le", "t2NQTrStZHtJECNFT3dUBLYA9AErxPCmkka", "t2GSWZZJzoesYxfPTWXkFn5UaxjiYxGBU2a",
-            "t2RpffkzyLRevGM3w9aWdqMX6bd8uuAK3vn", "t2JzjoQqnuXtTGSN7k7yk5keURBGvYofh1d", "t2AEefc72ieTnsXKmgK2bZNckiwvZe3oPNL", "t2NNs3ZGZFsNj2wvmVd8BSwSfvETgiLrD8J",
-            "t2ECCQPVcxUCSSQopdNquguEPE14HsVfcUn", "t2JabDUkG8TaqVKYfqDJ3rqkVdHKp6hwXvG", "t2FGzW5Zdc8Cy98ZKmRygsVGi6oKcmYir9n", "t2DUD8a21FtEFn42oVLp5NGbogY13uyjy9t",
-            "t2UjVSd3zheHPgAkuX8WQW2CiC9xHQ8EvWp", "t2TBUAhELyHUn8i6SXYsXz5Lmy7kDzA1uT5", "t2Tz3uCyhP6eizUWDc3bGH7XUC9GQsEyQNc", "t2NysJSZtLwMLWEJ6MH3BsxRh6h27mNcsSy",
-            "t2KXJVVyyrjVxxSeazbY9ksGyft4qsXUNm9", "t2J9YYtH31cveiLZzjaE4AcuwVho6qjTNzp", "t2QgvW4sP9zaGpPMH1GRzy7cpydmuRfB4AZ", "t2NDTJP9MosKpyFPHJmfjc5pGCvAU58XGa4",
-            "t29pHDBWq7qN4EjwSEHg8wEqYe9pkmVrtRP", "t2Ez9KM8VJLuArcxuEkNRAkhNvidKkzXcjJ", "t2D5y7J5fpXajLbGrMBQkFg2mFN8fo3n8cX", "t2UV2wr1PTaUiybpkV3FdSdGxUJeZdZztyt",
-            };
+        vFoundersRewardAddress = { "t2BnFkjKYJbW7q4VPTHQaZQXqARtn3RveCQ" };
         assert(vFoundersRewardAddress.size() <= consensus.GetLastFoundersRewardBlockHeight(0));
     }
 };
@@ -884,13 +832,13 @@ public:
         keyConstants.base58Prefixes[ZCVIEWING_KEY]      = {0xA8,0xAC,0x0C};
         keyConstants.base58Prefixes[ZCSPENDING_KEY]     = {0xAC,0x08};
 
-        keyConstants.bech32HRPs[SAPLING_PAYMENT_ADDRESS]      = "zregtestsapling";
-        keyConstants.bech32HRPs[SAPLING_FULL_VIEWING_KEY]     = "zviewregtestsapling";
-        keyConstants.bech32HRPs[SAPLING_INCOMING_VIEWING_KEY] = "zivkregtestsapling";
-        keyConstants.bech32HRPs[SAPLING_EXTENDED_SPEND_KEY]   = "secret-extended-key-regtest";
-        keyConstants.bech32HRPs[SAPLING_EXTENDED_FVK]         = "zxviewregtestsapling";
+        keyConstants.bech32HRPs[SAPLING_PAYMENT_ADDRESS]      = "rspec";
+        keyConstants.bech32HRPs[SAPLING_FULL_VIEWING_KEY]     = "rspecviews";
+        keyConstants.bech32HRPs[SAPLING_INCOMING_VIEWING_KEY] = "rspecivks";
+        keyConstants.bech32HRPs[SAPLING_EXTENDED_SPEND_KEY]   = "secret-extended-key-rspec";
+        keyConstants.bech32HRPs[SAPLING_EXTENDED_FVK]         = "rxspecviews";
 
-        keyConstants.bech32mHRPs[TEX_ADDRESS]                 = "texregtest";
+        keyConstants.bech32mHRPs[TEX_ADDRESS]                 = "rstex";
 
         // The best chain should have at least this much work.
         consensus.nMinimumChainWork = uint256S("0x00");
