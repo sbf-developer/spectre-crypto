@@ -1,0 +1,43 @@
+Building Spectre
+================
+
+Spectre is a privacy-focused node forked from Zcash. Build steps match the upstream Zcash toolchain.
+
+## Requirements
+
+- 64-bit Linux (recommended) or supported Unix/macOS
+- ~6 GB RAM for linking; ~2 GB disk for proving params
+- Dependencies: see `depends/` or `./zcutil/build.sh` (builds deps automatically on Linux)
+
+## Quick build (Linux)
+
+```bash
+./zcutil/fetch-params.sh
+./zcutil/build.sh -j$(nproc)
+```
+
+Binaries are written to `src/`:
+
+- `spectred` — full node daemon
+- `spectre-cli` — RPC client
+- `spectre-tx` — transaction utility
+
+## First run (regtest)
+
+```bash
+./src/spectred -regtest -daemon
+./src/spectre-cli -regtest getblockchaininfo
+```
+
+Data directory: `~/.spectre/` (config file: `spectre.conf`).
+
+## More documentation
+
+- [README.md](README.md) — project overview
+- [doc/developer-notes.md](doc/developer-notes.md) — coding conventions
+- [doc/unit-tests.md](doc/unit-tests.md) — running tests
+- [SECURITY.md](SECURITY.md) — vulnerability reporting
+
+## License
+
+MIT — see [COPYING](COPYING).
