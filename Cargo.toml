@@ -1,6 +1,6 @@
 [package]
 name = "librustzcash"
-description = "Rust FFI used by the zcashd binary. Not an official API."
+description = "Rust FFI used by the spectred binary. Not an official API."
 version = "0.2.0"
 authors = [
     "Sean Bowe",
@@ -15,8 +15,8 @@ authors = [
     "Larry Ruane <larry@electriccoin.co>",
     "Steven Smith",
 ]
-homepage = "https://github.com/zcash/zcash"
-repository = "https://github.com/zcash/zcash"
+homepage = "https://github.com/sbf-developer/spectre-crypto"
+repository = "https://github.com/sbf-developer/spectre-crypto"
 readme = "README.md"
 license = "MIT OR Apache-2.0"
 edition = "2018"

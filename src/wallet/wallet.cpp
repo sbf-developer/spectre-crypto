@@ -2787,7 +2787,7 @@ static void OrchardNoteCommitmentTreeDiverged(int nHeight)
         nHeight);
     uiInterface.ThreadSafeMessageBox(
         _("Error: The wallet's Orchard note commitment tree has become inconsistent "
-          "with the block chain. The zcashd node will now shut down; please restart "
+          "with the block chain. The spectred node will now shut down; please restart "
           "with the -rescan option to rebuild the wallet's Orchard note commitment "
           "tree."),
         "", CClientUIInterface::MSG_ERROR);
@@ -6638,7 +6638,7 @@ std::string CWallet::GetWalletHelpString(bool showDebug)
     strUsage += HelpMessageOpt("-walletnotify=<cmd>", _("Execute command when a wallet transaction changes (%s in cmd is replaced by TxID)"));
     strUsage += HelpMessageOpt("-zapwallettxes=<mode>", _("Delete all wallet transactions and only recover those parts of the blockchain through -rescan on startup") +
                                " " + _("(1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)"));
-    strUsage += HelpMessageOpt("-walletrequirebackup=<bool>", _("By default, the wallet will not allow generation of new spending keys & addresses from the mnemonic seed until the backup of that seed has been confirmed with the `zcashd-wallet-tool` utility. A user may start zcashd with `-walletrequirebackup=false` to allow generation of spending keys even if the backup has not yet been confirmed."));
+    strUsage += HelpMessageOpt("-walletrequirebackup=<bool>", _("By default, the wallet will not allow generation of new spending keys & addresses from the mnemonic seed until the backup of that seed has been confirmed with the `spectred-wallet-tool` utility. A user may start spectred with `-walletrequirebackup=false` to allow generation of spending keys even if the backup has not yet been confirmed."));
 
     if (showDebug)
     {
@@ -7376,7 +7376,7 @@ PaymentAddressSource GetSourceForPaymentAddress::operator()(const libzcash::Sapl
                 // If we have the HD keypath, it's related to a seed.
                 if (m_wallet->mapSaplingZKeyMetadata.count(ivk) > 0 &&
                         m_wallet->mapSaplingZKeyMetadata[ivk].hdKeypath != "") {
-                    // The following keypaths have been used in zcashd:
+                    // The following keypaths have been used in spectred:
                     // - Legacy seed:     m/32'/coin_type'/account_counter'
                     // - Mnemonic phrase: m/32'/coin_type'/ZCASH_LEGACY_ACCOUNT'/account_counter'
                     //

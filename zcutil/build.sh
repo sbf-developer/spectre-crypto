@@ -56,8 +56,8 @@ $0 --help
   Show this help message and exit.
 
 $0 [ MAKEARGS... ]
-  Build Zcash and most of its transitive dependencies from
-  source. MAKEARGS are applied to both dependencies and Zcash itself.
+  Build Spectre and most of its transitive dependencies from
+  source. MAKEARGS are applied to both dependencies and Spectre itself.
 
   Pass flags to ./configure using the CONFIGURE_FLAGS environment variable.
   For example, to enable coverage instrumentation (thus enabling "make cov"

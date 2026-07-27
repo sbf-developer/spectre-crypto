@@ -208,7 +208,7 @@ static std::string FormatException(const std::exception* pex, const char* pszThr
     char pszModule[MAX_PATH] = "";
     GetModuleFileNameA(NULL, pszModule, sizeof(pszModule));
 #else
-    const char* pszModule = "Zcash";
+    const char* pszModule = "Spectre";
 #endif
     if (pex)
         return strprintf(
@@ -261,13 +261,13 @@ static fs::path ZC_GetDefaultBaseParamsDir()
 {
     // Copied from GetDefaultDataDir and adapter for zcash params.
 
-    // Windows < Vista: C:\Documents and Settings\Username\Application Data\ZcashParams
-    // Windows >= Vista: C:\Users\Username\AppData\Roaming\ZcashParams
-    // Mac: ~/Library/Application Support/ZcashParams
-    // Unix: ~/.zcash-params
+    // Windows < Vista: C:\Documents and Settings\Username\Application Data\SpectreParams
+    // Windows >= Vista: C:\Users\Username\AppData\Roaming\SpectreParams
+    // Mac: ~/Library/Application Support/SpectreParams
+    // Unix: ~/.spectre-params
 #ifdef WIN32
     // Windows
-    return GetSpecialFolderPath(CSIDL_APPDATA) / "ZcashParams";
+    return GetSpecialFolderPath(CSIDL_APPDATA) / "SpectreParams";
 #else
     fs::path pathRet;
     char* pszHome = getenv("HOME");
@@ -279,10 +279,10 @@ static fs::path ZC_GetDefaultBaseParamsDir()
     // Mac
     pathRet /= "Library/Application Support";
     TryCreateDirectory(pathRet);
-    return pathRet / "ZcashParams";
+    return pathRet / "SpectreParams";
 #else
     // Unix
-    return pathRet / ".zcash-params";
+    return pathRet / ".spectre-params";
 #endif
 #endif
 }
@@ -419,7 +419,7 @@ void ReadConfigFile(const std::string& confPath,
             }
 
             InterpretNegativeSetting(strKey, strValue);
-            // Don't overwrite existing settings so command line settings override zcash.conf
+            // Don't overwrite existing settings so command line settings override spectre.conf
             if (mapSettingsRet.count(strKey) == 0)
                 mapSettingsRet[strKey] = strValue;
             mapMultiSettingsRet[strKey].push_back(strValue);
@@ -655,8 +655,8 @@ void SetThreadPriority(int nPriority)
 std::string PrivacyInfo()
 {
     return "\n" +
-           FormatParagraph(strprintf(_("In order to ensure you are adequately protecting your privacy when using Zcash, please see <%s>."),
-                                     "https://z.cash/support/security/")) + "\n";
+           FormatParagraph(strprintf(_("In order to ensure you are adequately protecting your privacy when using Spectre, please see <%s>."),
+                                     "https://github.com/sbf-developer/spectre-crypto/blob/master/SECURITY.md")) + "\n";
 }
 
 std::string LicenseInfo()
@@ -664,6 +664,7 @@ std::string LicenseInfo()
     return "\n" +
            FormatParagraph(strprintf(_("Copyright (C) 2009-%i The Bitcoin Core Developers"), COPYRIGHT_YEAR)) + "\n" +
            FormatParagraph(strprintf(_("Copyright (C) 2015-%i The Zcash Developers"), COPYRIGHT_YEAR)) + "\n" +
+           FormatParagraph(strprintf(_("Copyright (C) 2026-%i The Spectre Developers"), COPYRIGHT_YEAR)) + "\n" +
            "\n" +
            FormatParagraph(_("This is experimental software.")) + "\n" +
            "\n" +

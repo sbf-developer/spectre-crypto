@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# Execute all of the automated tests related to Zcash.
+# Execute all of the automated tests related to Spectre.
 #
 
 import argparse
@@ -53,10 +53,10 @@ RE_FORTIFY_AVAILABLE = re.compile('FORTIFY_SOURCE support available.*Yes')
 RE_FORTIFY_USED = re.compile('Binary compiled with FORTIFY_SOURCE support.*Yes')
 
 CXX_BINARIES = [
-    'src/zcashd',
-    'src/zcash-cli',
+    'src/spectred',
+    'src/spectre-cli',
     'src/zcash-gtest',
-    'src/zcash-tx',
+    'src/spectre-tx',
     'src/test/test_bitcoin',
 ]
 RUST_BINARIES = [
@@ -65,13 +65,13 @@ RUST_BINARIES = [
 # Binaries exempt from the FORTIFY_SOURCE check. checksec.sh detects
 # FORTIFY_SOURCE by the presence of __*_chk symbols, which the compiler only
 # emits for fortifiable libc calls whose destination buffer size is known at
-# compile time. src/zcash-cli is a small RPC client whose only fortifiable
+# compile time. src/spectre-cli is a small RPC client whose only fortifiable
 # calls (memcpy, read, fread, recv) operate on runtime-sized buffers, so no
 # __*_chk symbols are emitted even though -D_FORTIFY_SOURCE=2 is applied to the
 # whole build. checksec.sh therefore reports a false negative for it. See the
 # NOTE on test_fortify_source below and zcash/zcash#915.
 FORTIFY_EXEMPT_BINARIES = [
-    'src/zcash-cli',
+    'src/spectre-cli',
 ]
 
 def test_rpath_runpath(filename):
@@ -109,8 +109,8 @@ def check_security_hardening():
         ret &= subprocess.call(['make', '-C', repofile('src'), 'check-security']) == 0
     else:
         # Equivalent to make check-security (this is just for CI purpose)
-        bin_programs = ['src/zcashd', 'src/zcash-cli', 'src/zcash-tx', 'src/bench/bench_bitcoin']  # Replace with actual values
-        bin_scripts = ['src/zcashd-wallet-tool']   # Replace with actual values
+        bin_programs = ['src/spectred', 'src/spectre-cli', 'src/spectre-tx', 'src/bench/bench_bitcoin']
+        bin_scripts = ['src/spectred-wallet-tool']
 
         print(f"Checking binary security of {bin_programs + bin_scripts}...")
 
@@ -123,8 +123,8 @@ def check_security_hardening():
             ret &= subprocess.call(command) == 0
 
     # The remaining checks are only for ELF binaries
-    # Assume that if zcashd is an ELF binary, they all are
-    with open(repofile('src/zcashd'), 'rb') as f:
+    # Assume that if spectred is an ELF binary, they all are
+    with open(repofile('src/spectred'), 'rb') as f:
         magic = f.read(4)
         if not magic.startswith(b'\x7fELF'):
             return ret
