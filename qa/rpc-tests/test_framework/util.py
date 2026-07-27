@@ -29,7 +29,7 @@ import errno
 from . import coverage
 from .authproxy import AuthServiceProxy, JSONRPCException
 
-ZCASHD_BINARY = os.path.join('src', 'zcashd')
+ZCASHD_BINARY = os.path.join('src', 'spectred')
 
 COVERAGE_DIR = None
 PRE_BLOSSOM_BLOCK_TARGET_SPACING = 150
@@ -56,6 +56,9 @@ PORT_RANGE = 5000
 
 def zcashd_binary():
     return os.getenv("ZCASHD", ZCASHD_BINARY)
+
+def spectred_binary():
+    return zcashd_binary()
 
 class PortSeed:
     # Must be initialized with a unique integer for each process
@@ -200,7 +203,7 @@ def initialize_datadir(dirname, n, clock_offset=0):
     if not os.path.isdir(datadir):
         os.makedirs(datadir)
     rpc_u, rpc_p = rpc_auth_pair(n)
-    with open(os.path.join(datadir, "zcash.conf"), 'w', encoding='utf8') as f:
+    with open(os.path.join(datadir, "spectre.conf"), 'w', encoding='utf8') as f:
         f.write("regtest=1\n")
         f.write("showmetrics=0\n")
         f.write("rpcuser=" + rpc_u + "\n")
@@ -283,7 +286,6 @@ def initialize_chain(test_dir, num_nodes, cachedir, cache_behavior='current'):
             datadir = initialize_datadir(cachedir, i)
             args = [ zcashd_binary(), "-keypool=1", "-datadir="+datadir, "-discover=0" ]
             args.extend([
-                '-i-am-aware-zcashd-will-be-replaced-by-zebrad-and-zallet-in-2025',
                 '-nuparams=5ba81b19:1', # Overwinter
                 '-nuparams=76b809bb:1', # Sapling
                 '-mocktime=%d' % block_time
@@ -347,7 +349,7 @@ def initialize_chain(test_dir, num_nodes, cachedir, cache_behavior='current'):
                 cache_conf = json.load(cache_conf_file)
                 # obtain the clock offset as a negative number of seconds
                 offset = round(cache_conf['cache_time']) - round(time.time())
-                # overwrite port/rpcport and clock offset in zcash.conf
+                # overwrite port/rpcport and clock offset in spectre.conf
                 initialize_datadir(test_dir, i, clock_offset=offset)
 
     def init_persistent(cache_behavior):
@@ -375,7 +377,7 @@ def initialize_chain(test_dir, num_nodes, cachedir, cache_behavior='current'):
             with tarfile.open(wallet_tgz_filename, "r:gz") as wallet_tgz_file:
                 tarfile_extractall(wallet_tgz_file, os.path.join(to_dir, "wallet.dat"))
 
-            # Copy in per-node wallet config and update zcash.conf to set the
+            # Copy in per-node wallet config and update spectre.conf to set the
             # clock offsets correctly.
             cache_conf_filename = os.path.join(to_dir, 'cache_config.json')
             if not os.path.exists(cache_conf_filename):
@@ -384,7 +386,7 @@ def initialize_chain(test_dir, num_nodes, cachedir, cache_behavior='current'):
                 cache_conf = json.load(cache_conf_file)
                 # obtain the clock offset as a negative number of seconds
                 offset = round(cache_conf['cache_time']) - round(time.time())
-                # overwrite port/rpcport and clock offset in zcash.conf
+                # overwrite port/rpcport and clock offset in spectre.conf
                 initialize_datadir(test_dir, i, clock_offset=offset)
 
     def cache_rebuild_required():
@@ -506,7 +508,6 @@ def start_node(i, dirname, extra_args=None, rpchost=None, timewait=None, binary=
         binary = zcashd_binary()
     args = [ binary, "-datadir="+datadir, "-keypool=1", "-discover=0", "-rest" ]
     args.extend([
-        '-i-am-aware-zcashd-will-be-replaced-by-zebrad-and-zallet-in-2025',
         '-nuparams=5ba81b19:1', # Overwinter
         '-nuparams=76b809bb:1', # Sapling
     ])

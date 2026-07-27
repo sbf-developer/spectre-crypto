@@ -6,7 +6,6 @@ on:
     # `ci-skip.yml`.
     paths-ignore:
       # Documentation.
-      - 'contrib/debian/copyright'
       - 'doc/**'
       - '**.md'
       - 'COPYING'
@@ -17,7 +16,6 @@ on:
     # mirrored into `ci-skip.yml`.
     paths-ignore:
       # Documentation.
-      - 'contrib/debian/copyright'
       - 'doc/**'
       - '**.md'
       - 'COPYING'
@@ -171,17 +169,17 @@ jobs:
       - name: Cache Sprout parameters
         uses: actions/cache@v5
         with:
-          path: zcash-params
-          key: zcash-params
+          path: spectre-params
+          key: spectre-params
           restore-keys: |
-            zcash-params
+            spectre-params
 
       - name: Download Sprout parameters
         # In case the Sprout parameters are not currently cached
         shell: bash
         run: |
-          mkdir zcash-params || echo ""
-          curl -L -C - https://download.z.cash/downloads/sprout-groth16.params -o zcash-params/sprout-groth16.params
+          mkdir spectre-params || echo ""
+          curl -L -C - https://download.z.cash/downloads/sprout-groth16.params -o spectre-params/sprout-groth16.params
 
   build:
     name: Build tier ${{ matrix.tier }} platform ${{ matrix.platform }}
@@ -234,7 +232,7 @@ jobs:
         shell: bash
         run: echo "count=$(nproc 2> /dev/null || sysctl -n hw.logicalcpu)" >> "$GITHUB_OUTPUT"
 
-      - name: Build zcashd
+      - name: Build spectred
         id: build
         env:
           HOST: ${{ matrix.host }}
@@ -242,15 +240,15 @@ jobs:
           ./zcutil/build.sh
           -j"${{ steps.nproc.outputs.count }}"
 
-      - name: Upload zcashd and related executables (src)
+      - name: Upload spectred and related executables (src)
         uses: actions/upload-artifact@v7
         with:
-          name: zcashd-${{ matrix.name }}
+          name: spectred-${{ matrix.name }}
           path: |
-              ${{ format('./src/zcashd{0}', matrix.file_ext) }}
-              ${{ format('./src/zcash-cli{0}', matrix.file_ext) }}
-              ${{ format('./src/zcashd-wallet-tool{0}', matrix.file_ext) }}
-              ${{ format('./src/zcash-tx{0}', matrix.file_ext) }}
+              ${{ format('./src/spectred{0}', matrix.file_ext) }}
+              ${{ format('./src/spectre-cli{0}', matrix.file_ext) }}
+              ${{ format('./src/spectred-wallet-tool{0}', matrix.file_ext) }}
+              ${{ format('./src/spectre-tx{0}', matrix.file_ext) }}
               ${{ format('./src/test/test_bitcoin{0}', matrix.file_ext) }}
               ${{ format('./src/zcash-gtest{0}', matrix.file_ext) }}
               ./src/test/buildenv.py
@@ -336,7 +334,7 @@ jobs:
         shell: bash
         run: echo "count=$(nproc 2> /dev/null || sysctl -n hw.logicalcpu)" >> "$GITHUB_OUTPUT"
 
-      - name: Build zcashd with the flag being checked
+      - name: Build spectred with the flag being checked
         env:
           CONFIGURE_FLAGS: "${{ matrix.configure_flag }}"
           HOST: ${{ matrix.host }}
@@ -363,7 +361,7 @@ jobs:
       - name: Download src artifact
         uses: actions/download-artifact@v8
         with:
-          name: zcashd-${{ matrix.name }}
+          name: spectred-${{ matrix.name }}
           path: ./src
 
       - name: Make artifact executable
@@ -394,7 +392,7 @@ jobs:
       - name: Download src artifact
         uses: actions/download-artifact@v8
         with:
-          name: zcashd-${{ matrix.name }}
+          name: spectred-${{ matrix.name }}
           path: ./src
 
       - name: Make artifact executable
@@ -404,27 +402,27 @@ jobs:
       - name: Cache Sprout parameters
         uses: actions/cache@v5
         with:
-          path: zcash-params
-          key: zcash-params
+          path: spectre-params
+          key: spectre-params
           restore-keys: |
-            zcash-params
+            spectre-params
 
       - name: Download Sprout parameters
         # In case the cache of Sprout parameters step fails
         shell: bash
         run: |
-          mkdir zcash-params || echo ""
-          curl -L -C - https://download.z.cash/downloads/sprout-groth16.params -o zcash-params/sprout-groth16.params
+          mkdir spectre-params || echo ""
+          curl -L -C - https://download.z.cash/downloads/sprout-groth16.params -o spectre-params/sprout-groth16.params
 
-      - name: Setup zcash-params
+      - name: Setup spectre-params
         shell: bash
         run: |
           if [ "${{ runner.os }}" == "Windows" ]; then
-            mv zcash-params "$APPDATA/ZcashParams"
+            mv spectre-params "$APPDATA/SpectreParams"
           elif [ "${{ runner.os }}" == "macOS" ]; then
-            mv zcash-params "$HOME/Library/Application Support/ZcashParams"
+            mv spectre-params "$HOME/Library/Application Support/SpectreParams"
           elif [ "${{ runner.os }}" == "Linux" ]; then
-            mv zcash-params "$HOME/.zcash-params"
+            mv spectre-params "$HOME/.spectre-params"
           fi
 
       - name: Run GoogleTests
@@ -549,12 +547,12 @@ jobs:
       - name: Download src artifact
         uses: actions/download-artifact@v8
         with:
-          name: zcashd-${{ matrix.name }}
+          name: spectred-${{ matrix.name }}
           path: ./src
 
       - name: Make artifact executable
         if: runner.os != 'Windows'
-        run: chmod +x ${{ format('./src/zcash-tx{0}', matrix.file_ext) }}
+        run: chmod +x ${{ format('./src/spectre-tx{0}', matrix.file_ext) }}
 
       - name: Run util-test test
         shell: bash
@@ -612,7 +610,7 @@ jobs:
       - name: Download src artifact
         uses: actions/download-artifact@v8
         with:
-          name: zcashd-${{ matrix.name }}
+          name: spectred-${{ matrix.name }}
           path: ./src
 
       - name: Make artifact executable
@@ -620,11 +618,11 @@ jobs:
         run: |
           chmod +x ${{ format('./src/test/test_bitcoin{0}', matrix.file_ext) }}
           chmod +x ${{ format('./src/bench/bench_bitcoin{0}', matrix.file_ext) }}
-          chmod +x ${{ format('./src/zcashd{0}', matrix.file_ext) }}
-          chmod +x ${{ format('./src/zcash-cli{0}', matrix.file_ext) }}
+          chmod +x ${{ format('./src/spectred{0}', matrix.file_ext) }}
+          chmod +x ${{ format('./src/spectre-cli{0}', matrix.file_ext) }}
           chmod +x ${{ format('./src/zcash-gtest{0}', matrix.file_ext) }}
-          chmod +x ${{ format('./src/zcashd-wallet-tool{0}', matrix.file_ext) }}
-          chmod +x ${{ format('./src/zcash-tx{0}', matrix.file_ext) }}
+          chmod +x ${{ format('./src/spectred-wallet-tool{0}', matrix.file_ext) }}
+          chmod +x ${{ format('./src/spectre-tx{0}', matrix.file_ext) }}
 
       - name: Run sec-hard test
         shell: bash
@@ -697,39 +695,39 @@ jobs:
       - name: Download src artifact
         uses: actions/download-artifact@v8
         with:
-          name: zcashd-${{ matrix.name }}
+          name: spectred-${{ matrix.name }}
           path: ./src
 
       - name: Make artifact executable
         if: runner.os != 'Windows'
         run: |
-          chmod +x ${{ format('./src/zcashd{0}', matrix.file_ext) }}
-          chmod +x ${{ format('./src/zcash-cli{0}', matrix.file_ext) }}
+          chmod +x ${{ format('./src/spectred{0}', matrix.file_ext) }}
+          chmod +x ${{ format('./src/spectre-cli{0}', matrix.file_ext) }}
 
       - name: Get Sprout parameters
         uses: actions/cache@v5
         with:
-          path: zcash-params
-          key: zcash-params
+          path: spectre-params
+          key: spectre-params
           restore-keys: |
-            zcash-params
+            spectre-params
 
       - name: Download Sprout parameters
         # In case the cache of Sprout parameters step fails
         shell: bash
         run: |
-          mkdir zcash-params || echo ""
-          curl -L -C - https://download.z.cash/downloads/sprout-groth16.params -o zcash-params/sprout-groth16.params
+          mkdir spectre-params || echo ""
+          curl -L -C - https://download.z.cash/downloads/sprout-groth16.params -o spectre-params/sprout-groth16.params
 
-      - name: Setup zcash-params
+      - name: Setup spectre-params
         shell: bash
         run: |
           if [ "${{ runner.os }}" == "Windows" ]; then
-            mv zcash-params "$APPDATA/ZcashParams"
+            mv spectre-params "$APPDATA/SpectreParams"
           elif [ "${{ runner.os }}" == "macOS" ]; then
-            mv zcash-params "$HOME/Library/Application Support/ZcashParams"
+            mv spectre-params "$HOME/Library/Application Support/SpectreParams"
           elif [ "${{ runner.os }}" == "Linux" ]; then
-            mv zcash-params "$HOME/.zcash-params"
+            mv spectre-params "$HOME/.spectre-params"
           fi
 
       - name: RPC test ${{ matrix.shard }}
@@ -761,4 +759,4 @@ jobs:
               sys.exit(1)
           EOF
           . ./venv/bin/activate
-          ZCASHD=$(pwd)/${{ format('src/zcashd{0}', matrix.file_ext) }} SRC_DIR=$(pwd) python3 ./subclass.py
+          ZCASHD=$(pwd)/${{ format('src/spectred{0}', matrix.file_ext) }} SRC_DIR=$(pwd) python3 ./subclass.py

@@ -14,7 +14,6 @@ on:
     # and mirrored into `ci.yml`.
     paths:
       # Documentation.
-      - 'contrib/debian/copyright'
       - 'doc/**'
       - '**.md'
       - 'COPYING'
@@ -53,7 +52,6 @@ jobs:
           import sys
 
           paths = [
-              r'^contrib/debian/copyright$',
               r'^doc/.*',
               r'.*\.md$',
               r'^COPYING$',

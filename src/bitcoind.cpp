@@ -76,7 +76,7 @@ bool AppInit(int argc, char* argv[])
     // Process help and version before taking care about datadir
     if (mapArgs.count("-?") || mapArgs.count("-h") ||  mapArgs.count("-help") || mapArgs.count("-version"))
     {
-        std::string strUsage = _("Zcash Daemon") + " " + _("version") + " " + FormatFullVersion() + "\n" + PrivacyInfo();
+        std::string strUsage = _("Spectre Daemon") + " " + _("version") + " " + FormatFullVersion() + "\n" + PrivacyInfo();
 
         if (mapArgs.count("-version"))
         {
@@ -85,7 +85,7 @@ bool AppInit(int argc, char* argv[])
         else
         {
             strUsage += "\n" + _("Usage:") + "\n" +
-                  "  zcashd [options]                     " + _("Start Zcash Daemon") + "\n";
+                  "  spectred [options]                     " + _("Start Spectre Daemon") + "\n";
 
             strUsage += "\n" + HelpMessage(HMM_BITCOIND);
         }
@@ -107,58 +107,20 @@ bool AppInit(int argc, char* argv[])
         } catch (const missing_zcash_conf& e) {
             auto confFilename = GetArg("-conf", BITCOIN_CONF_FILENAME);
             fprintf(stderr,
-                (_("Before starting zcashd, you need to create a configuration file:\n"
+                (_("Before starting spectred, you need to create a configuration file:\n"
                    "%s\n"
                    "It can be completely empty! That indicates you are happy with the default\n"
-                   "configuration of zcashd. But requiring a configuration file to start ensures\n"
-                   "that zcashd won't accidentally compromise your privacy if there was a default\n"
+                   "configuration of spectred. But requiring a configuration file to start ensures\n"
+                   "that spectred won't accidentally compromise your privacy if there was a default\n"
                    "option you needed to change.\n"
                    "\n"
-                   "You can look at the example configuration file for suggestions of default\n"
-                   "options that you may want to change. It should be in one of these locations,\n"
-                   "depending on how you installed Zcash:\n") +
-                 _("- Source code:  %s%s\n"
-                   "- .deb package: %s%s\n")).c_str(),
+                   "See contrib/spectre.conf.example for optional settings.\n") +
+                 _("- Example: %s%s\n")).c_str(),
                 GetConfigFile(confFilename).string().c_str(),
-                "contrib/debian/examples/", confFilename.c_str(),
-                "/usr/share/doc/zcash/examples/", confFilename.c_str());
+                "contrib/", confFilename.c_str());
             return false;
         } catch (const std::exception& e) {
             fprintf(stderr,"Error reading configuration file: %s\n", e.what());
-            return false;
-        }
-
-        // Check that the node operator is aware of `zcashd` deprecation.
-        if (!GetBoolArg("-i-am-aware-zcashd-will-be-replaced-by-zebrad-and-zallet-in-2025", false)) {
-            auto confFilename = GetArg("-conf", BITCOIN_CONF_FILENAME);
-            fprintf(stderr,
-                _("zcashd is being deprecated in 2025. Full nodes are being migrated to zebrad,\n"
-                  "and the Zallet wallet is being built as a replacement for the zcashd wallet.\n"
-                  "\n"
-                  "For some of zcashd's JSON-RPC methods, zebrad or Zallet should be a drop-in\n"
-                  "replacement. Other JSON-RPC methods may require modified usage, and some\n"
-                  "JSON-RPC methods will not be supported.\n"
-                  "\n"
-                  "You can find all information about the zcashd deprecation process on this\n"
-                  "webpage, which you can monitor for future updates:\n"
-                  "%s\n"
-                  "\n"
-                  "We are collecting information about how zcashd users are currently using the\n"
-                  "existing JSON-RPC methods. The above webpage has a link to a spreadsheet\n"
-                  "containing the information we have collected so far, and the planned status\n"
-                  "for each JSON-RPC method based on that information. If you have not provided\n"
-                  "feedback to us about how you are using the zcashd JSON-RPC interface, please\n"
-                  "do so as soon as possible.\n"
-                  "\n"
-                  "To confirm that you are aware that zcashd is being deprecated and that you\n"
-                  "will need to migrate to zebrad and/or Zallet in 2025, add the following\n"
-                  "option:\n"
-                  "%s\n"
-                  "to your config file:\n"
-                  "%s\n").c_str(),
-                "https://z.cash/support/zcashd-deprecation/",
-                "i-am-aware-zcashd-will-be-replaced-by-zebrad-and-zallet-in-2025=1",
-                GetConfigFile(confFilename).string().c_str());
             return false;
         }
 
@@ -186,14 +148,14 @@ bool AppInit(int argc, char* argv[])
 
         if (fCommandLine)
         {
-            fprintf(stderr, "Error: There is no RPC client functionality in zcashd. Use the zcash-cli utility instead.\n");
+            fprintf(stderr, "Error: There is no RPC client functionality in spectred. Use spectre-cli instead.\n");
             exit(EXIT_FAILURE);
         }
 #ifndef WIN32
         fDaemon = GetBoolArg("-daemon", false);
         if (fDaemon)
         {
-            fprintf(stdout, "Zcash server starting\n");
+            fprintf(stdout, "Spectre server starting\n");
 
             // Daemonize
             pid_t pid = fork();

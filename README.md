@@ -35,7 +35,7 @@ Details: [INSTALL](INSTALL)
 | [COPYING](COPYING) | MIT license (required) |
 | [doc/developer-notes.md](doc/developer-notes.md) | Developer conventions |
 | [doc/unit-tests.md](doc/unit-tests.md) | Tests |
-| [contrib/docker/](contrib/docker/) | Docker setup |
+| [contrib/docker/](contrib/docker/) | Legacy upstream Zcash Docker (not Spectre builds) |
 | [doc/ARCHITECTURE.md](doc/ARCHITECTURE.md) | Codebase structure and runtime diagram |
 | [doc/CHAIN.md](doc/CHAIN.md) | Network ports, HRPs, genesis, checkpoints |
 | [doc/LAUNCH.md](doc/LAUNCH.md) | Pre-mainnet launch checklist |

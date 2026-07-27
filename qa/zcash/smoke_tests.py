@@ -559,9 +559,9 @@ def run_stage(stage, zcash):
 class ZcashNode(object):
     def __init__(self, args, zcashd=None, zcash_cli=None):
         if zcashd is None:
-            zcashd = os.getenv('ZCASHD', 'zcashd')
+            zcashd = os.getenv('ZCASHD', 'spectred')
         if zcash_cli is None:
-            zcash_cli = os.getenv('ZCASHCLI', 'zcash-cli')
+            zcash_cli = os.getenv('ZCASHCLI', 'spectre-cli')
 
         self.__datadir = args.datadir
         self.__wallet = args.wallet
@@ -623,7 +623,7 @@ class ZcashNode(object):
 
         rpcuserpass = '%s:%s' % (rpcuser, rpcpassword)
         rpchost = '127.0.0.1'
-        rpcport = 18232 if self.__testnet else 8232
+        rpcport = 18732 if self.__testnet else 8732
 
         url = 'http://%s@%s:%d' % (rpcuserpass, rpchost, rpcport)
         if timewait is not None:

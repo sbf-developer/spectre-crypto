@@ -1,3 +1,7 @@
+# Legacy Zcash Docker (upstream)
+
+**Not maintained for Spectre.** These files build/run the upstream `zcashd` apt package from ZODL. For Spectre, build from source (`./zcutil/build.sh`) or add a Spectre-specific Dockerfile later.
+
 # zcash Dockerfile
 
 This is an example Dockerfile to run the zcashd daemon in a containerized Debian base OS. The image pulls the apt package built by Zcash Open Development Lab.

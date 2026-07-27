@@ -1,3 +1,6 @@
+# Upstream Zcash Docker Hub publishing (apt.z.cash packages). Not used for Spectre.
+# Kept for reference; run manually only if you maintain Zcash-compatible images.
+
 name: Build and Push Docker Image to Docker Hub
 
 on:

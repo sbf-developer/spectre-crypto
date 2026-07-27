@@ -8,7 +8,7 @@ Use this after building binaries (`./zcutil/build.sh`). Code prep alone does not
 ./zcutil/fetch-params.sh
 ./zcutil/build.sh -j$(nproc)
 src/spectred -version
-src/test/test_spectre --list_content  # optional: run unit tests
+src/test/test_bitcoin --list_content  # optional: run unit tests
 ```
 
 ## 2. Replace placeholder addresses
