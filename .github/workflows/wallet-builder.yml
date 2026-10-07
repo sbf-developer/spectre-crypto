@@ -31,7 +31,7 @@ jobs:
 
       - name: Upload wallet fixture and manifests
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: regtest-wallet-fixture
           path: |
